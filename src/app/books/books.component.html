@@ -1,0 +1,39 @@
+<div class="container">
+  <div class="row justify-content-center justify-content-lg-start">
+    <div class="col item-wrapper" 
+         *ngFor="let b of books" 
+         (click)="viewBook(b)">
+        <div class="remove-item">        
+            <button type="button" 
+                    *ngIf="isDeletableMode"
+                    class="cancel-btn" 
+                    (click)="deleteBook(b,$event)">
+                <i class="material-icons">close</i>
+            </button>
+        </div>
+      <div class="img-wrapper">
+        <img [src]="b.imgUrl" [alt]="b.title" [title]="b.title">
+      </div>
+      <div class="item-details">
+        <p>{{b.title | titleForamt}}</p>
+        <p>Author: {{b.author}}</p>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="edit-buttons-wrapper" [ngClass]="{'close-toolbar' : isChecked}">
+  <div class="mb-2">
+    <button type="button"
+            class="add-btn" 
+           (click)="addItem()">
+         <i class="material-icons">add box</i>
+    </button>
+  </div>
+  <div>
+    <button type="button" 
+            (click)="deleteItems()">
+          <i class="material-icons">delete</i>
+    </button>
+  </div>
+</div>
+<modal-component (modalClose)="editModalClosed()"></modal-component>
